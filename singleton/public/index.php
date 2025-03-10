@@ -10,8 +10,8 @@ require('../vendor/autoload.php');
 $config = Config::getSetting();
 
 # Afficher une valeur contenu dans config.php
-echo $config->getValue('db')['host'];
+echo $config->getValue('db')['host']."\n";
 
 # Récupérer une seconde instance de Config et vérifié que les deux instances sont identiques
 $config2 = Config::getSetting();
-echo ($config === $config2);
+var_dump($config === $config2);

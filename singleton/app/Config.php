@@ -5,20 +5,20 @@
 namespace App;
 
 class Config {
+    private static $_instance;
     private static $_settings;
 
     public static function getSetting(){
-        if(is_null(self::$_settings)){
-            self::$_settings = new Config();
+        if(is_null(self::$_instance)){
+            self::$_instance = new Config();
         }
-        return self::$_settings;
+        return self::$_instance;
     }
     private function __construct(){
-        self::getSetting();
-
+        self::$_settings = require __DIR__ . '/../config/config.php';
     }
 
     public function getValue($key){
-        return self::$_settings[$key];
+        return self::$_settings[$key] ?? null;
     }
 }
