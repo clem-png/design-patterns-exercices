@@ -2,7 +2,7 @@
 
 namespace App;
 
-class MySqlQueryBuilder implements QueryBuilderInterface
+class LiteralBuilder implements QueryBuilderInterface
 {
     protected $query = [];
 
@@ -32,17 +32,18 @@ class MySqlQueryBuilder implements QueryBuilderInterface
 
     public function getSQL(): string
     {
-        $sql = "SELECT " . implode(', ', $this->query['select'] ?? ['*']);
-        $sql .= " FROM " . ($this->query['from'] ?? '');
+        $literal = "Je sélectionne ";
+        $literal .= empty($this->query['select']) ? "tous les champs" : "les champs " . implode(', ', $this->query['select']);
+        $literal .= " de la table " . ($this->query['from'] ?? '');
         
         if (!empty($this->query['where'])) {
-            $sql .= " WHERE " . implode(' AND ', $this->query['where']);
+            $literal .= " où " . implode(' et ', $this->query['where']);
         }
         
         if (isset($this->query['limit'])) {
-            $sql .= " LIMIT " . $this->query['limit'];
+            $literal .= " avec une limite de " . $this->query['limit'] . " résultats";
         }
         
-        return $sql;
+        return $literal . ".";
     }
 }
