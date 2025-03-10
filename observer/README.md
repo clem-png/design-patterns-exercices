@@ -1,3 +1,8 @@
+# CHANGEMENT
+
+Petit changement dans le test, il y avait une erreur, yves était unset donc non notifier et dans le assert il devait l'être et un au autre devait ne pas etre notifier, j'ai donc corriger cela ; )
+
+
 # Observer
 
 ## Installation
